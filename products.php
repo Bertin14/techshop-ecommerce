@@ -1,5 +1,13 @@
 <?php require 'includes/db.php'; ?>
 <?php require 'includes/header.php'; ?>
+<?php
+// Handle search from homepage
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+if ($search !== '') {
+    // Pre-fill the search input with the search term
+    echo "<script>window.onload = function(){ document.getElementById('searchInput').value = '" . htmlspecialchars($search) . "'; filterProducts(); }</script>";
+}
+?>
 
 <section class="section">
     <h2>
@@ -15,6 +23,13 @@
         }
         ?>
     </h2>
+    <!-- SEARCH BAR -->
+    <div style="margin-bottom:20px;">
+        <input type="text" id="searchInput" placeholder="🔍 Search products..."
+            onkeyup="filterProducts()"
+            style="width:100%; max-width:400px; padding:12px 20px; border:2px solid #ddd;
+           border-radius:8px; font-size:16px; outline:none;">
+    </div>
 
     <!-- FILTER BAR -->
     <div style="margin-bottom:25px; display:flex; gap:10px; flex-wrap:wrap;">
@@ -50,24 +65,42 @@
         <?php else: ?>
             <?php foreach ($products as $product): ?>
                 <div class="product-card">
+                    <?php
+                    $badges = ['New', 'Hot', 'Sale', 'New', 'Hot', 'Sale', 'New', 'Hot'];
+                    $badgeClasses = ['badge-new', 'badge-hot', 'badge-sale', 'badge-new', 'badge-hot', 'badge-sale', 'badge-new', 'badge-hot'];
+                    $i = ($product['id'] - 1) % 8;
+                    echo "<span class='product-badge {$badgeClasses[$i]}'>{$badges[$i]}</span>";
+                    ?>
                     <img src="/techshop/assets/images/<?= htmlspecialchars($product['image']) ?>"
                         alt="<?= htmlspecialchars($product['name']) ?>"
-                        onerror="this.src='https://placehold.co/300x180?text=No+Image'">
+                        onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     <div class="card-body">
+                        <div class="stars">★★★★☆</div>
                         <h3><?= htmlspecialchars($product['name']) ?></h3>
                         <p style="color:#888; font-size:13px; margin-bottom:8px;">
-                            <?= htmlspecialchars(substr($product['description'], 0, 60)) ?>...
+                            <?= htmlspecialchars(substr($product['description'], 0, 55)) ?>...
                         </p>
                         <p class="price">RWF <?= number_format($product['price']) ?></p>
-                        <p style="font-size:13px; color: <?= $product['stock'] > 0 ? 'green' : 'red' ?>;">
-                            <?= $product['stock'] > 0 ? '✅ In Stock' : '❌ Out of Stock' ?>
-                        </p>
-                        <a href="/techshop/product-detail.php?id=<?= $product['id'] ?>" class="btn" style="margin-top:10px;">View Details</a>
+                        <a href="/techshop/product-detail.php?id=<?= $product['id'] ?>" class="btn">View Details</a>
                     </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
 </section>
+<script>
+    function filterProducts() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach(card => {
+            const name = card.querySelector('h3').textContent.toLowerCase();
+            if (name.includes(input)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
 
 <?php require 'includes/footer.php'; ?>
