@@ -1,20 +1,22 @@
-FROM php:8.2-apache
+FROM ubuntu:22.04
 
-# Disable conflicting MPM modules and enable the right one
-RUN a2dismod mpm_event mpm_worker 2>/dev/null || true \
-    && a2enmod mpm_prefork
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Enable mysqli and pdo_mysql
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN apt-get update && apt-get install -y \
+    apache2 \
+    php8.1 \
+    php8.1-mysql \
+    libapache2-mod-php8.1 \
+    && apt-get clean
 
-# Enable Apache rewrite module
-RUN a2enmod rewrite
+RUN a2enmod php8.1 rewrite
 
-# Copy project files to Apache web root
 COPY . /var/www/html/
+RUN rm -f /var/www/html/index.html
 
-# Set working directory
-WORKDIR /var/www/html
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
 
-# Give proper permissions
-RUN chown -R www-data:www-data /var/www/html
+EXPOSE 80
+
+CMD ["apache2ctl", "-D", "FOREGROUND"]
