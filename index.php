@@ -6,12 +6,12 @@
     <h1>Welcome to ⚡ TechShop</h1>
     <p>Your #1 Electronics Store in Rwanda — Fast Delivery, Best Prices</p>
 
-    <form action="/techshop/products.php" method="GET" class="hero-search">
+    <form action="/products.php" method="GET" class="hero-search">
         <input type="text" name="search" placeholder="Search for laptops, phones, accessories...">
         <button type="submit">Search</button>
     </form>
 
-    <a href="/techshop/products.php" class="btn">Browse All Products</a>
+    <a href="/products.php" class="btn" style="margin-top:15px;">Browse All Products</a>
 
     <!-- ANIMATED STATS -->
     <div class="hero-stats">
@@ -52,21 +52,6 @@
     });
 </script>
 
-<!-- SEARCH BAR -->
-<form action="/techshop/products.php" method="GET" style="margin-top:25px; display:flex; justify-content:center; gap:0;">
-    <input type="text" name="search" placeholder="🔍 Search for laptops, phones..."
-        style="width:100%; max-width:420px; padding:14px 20px; border:none;
-             border-radius:8px 0 0 8px; font-size:16px; outline:none;">
-    <button type="submit"
-        style="background:#e94560; color:white; border:none; padding:14px 24px;
-             border-radius:0 8px 8px 0; font-size:16px; cursor:pointer;">
-        Search
-    </button>
-</form>
-
-<a href="/techshop/products.php" class="btn" style="margin-top:20px;">Browse All Products</a>
-</section>
-
 <!-- FEATURED PRODUCTS -->
 <section class="section">
     <h2>Featured Products</h2>
@@ -74,17 +59,16 @@
         <?php
         $stmt = $pdo->query("SELECT * FROM products LIMIT 8");
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         foreach ($products as $product):
+            $badges = ['New', 'Hot', 'Sale', 'New', 'Hot', 'Sale', 'New', 'Hot'];
+            $badgeClasses = ['badge-new', 'badge-hot', 'badge-sale', 'badge-new', 'badge-hot', 'badge-sale', 'badge-new', 'badge-hot'];
+            $i = ($product['id'] - 1) % 8;
+            $img = $product['image'];
+            $src = (strpos($img, 'http') === 0) ? $img : '/assets/images/' . htmlspecialchars($img);
         ?>
             <div class="product-card">
-                <?php
-                $badges = ['New', 'Hot', 'Sale', 'New', 'Hot', 'Sale', 'New', 'Hot'];
-                $badgeClasses = ['badge-new', 'badge-hot', 'badge-sale', 'badge-new', 'badge-hot', 'badge-sale', 'badge-new', 'badge-hot'];
-                $i = ($product['id'] - 1) % 8;
-                echo "<span class='product-badge {$badgeClasses[$i]}'>{$badges[$i]}</span>";
-                ?>
-                <img src="/techshop/assets/images/<?= htmlspecialchars($product['image']) ?>"
+                <span class="product-badge <?= $badgeClasses[$i] ?>"><?= $badges[$i] ?></span>
+                <img src="<?= $src ?>"
                     alt="<?= htmlspecialchars($product['name']) ?>"
                     onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                 <div class="card-body">
@@ -94,7 +78,7 @@
                         <?= htmlspecialchars(substr($product['description'], 0, 55)) ?>...
                     </p>
                     <p class="price">RWF <?= number_format($product['price']) ?></p>
-                    <a href="/techshop/product-detail.php?id=<?= $product['id'] ?>" class="btn">View Details</a>
+                    <a href="/product-detail.php?id=<?= $product['id'] ?>" class="btn">View Details</a>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -110,7 +94,7 @@
         $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($categories as $cat):
         ?>
-            <a href="/techshop/products.php?category=<?= $cat['id'] ?>" style="text-decoration:none;">
+            <a href="/products.php?category=<?= $cat['id'] ?>" style="text-decoration:none;">
                 <div class="product-card" style="text-align:center; padding:30px;">
                     <div class="card-body">
                         <h3 style="font-size:20px;">
