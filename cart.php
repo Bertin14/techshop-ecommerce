@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ];
             }
         }
-        header('Location: /techshop/cart.php');
+        header('Location: /cart.php');
         exit;
     }
 
@@ -35,13 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $_SESSION['cart'][$product_id]['quantity'] = $quantity;
         }
-        header('Location: /techshop/cart.php');
+        header('Location: /cart.php');
         exit;
     }
 
     if ($action === 'remove') {
         unset($_SESSION['cart'][$product_id]);
-        header('Location: /techshop/cart.php');
+        header('Location: /cart.php');
         exit;
     }
 }
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if (empty($_SESSION['cart'])): ?>
         <div style="text-align:center; padding:60px;">
             <p style="font-size:20px; color:#888;">Your cart is empty.</p>
-            <a href="/techshop/products.php" class="btn" style="margin-top:20px;">Continue Shopping</a>
+            <a href="/products.php" class="btn" style="margin-top:20px;">Continue Shopping</a>
         </div>
 
     <?php else: ?>
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ?>
                     <tr>
                         <td style="display:flex; align-items:center; gap:15px; text-align:left;">
-                            <img src="/techshop/assets/images/<?= htmlspecialchars($item['image']) ?>"
+                            <img src="/assets/images/<?= htmlspecialchars($item['image']) ?>"
                                 onerror="this.src='https://placehold.co/60x60?text=?'"
                                 style="width:60px; height:60px; object-fit:cover; border-radius:6px;">
                             <span><?= htmlspecialchars($item['name']) ?></span>
@@ -112,8 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 Total: <span style="color:#e94560;">RWF <?= number_format($total) ?></span>
             </p>
             <div style="display:flex; gap:15px; justify-content:flex-end; margin-top:20px;">
-                <a href="/techshop/products.php" class="btn" style="background:#555;">Continue Shopping</a>
-                <a href="/techshop/checkout.php" class="btn">Proceed to Checkout →</a>
+                <a href="/products.php" class="btn" style="background:#555;">Continue Shopping</a>
+                <a href="/checkout.php" class="btn">Proceed to Checkout →</a>
             </div>
         </div>
 

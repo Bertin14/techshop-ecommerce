@@ -6,16 +6,16 @@
     </div>
     <div class="footer-col">
       <h4>Quick Links</h4>
-      <a href="/techshop/index.php">Home</a>
-      <a href="/techshop/products.php">Products</a>
-      <a href="/techshop/cart.php">Cart</a>
+      <a href="/index.php">Home</a>
+      <a href="/products.php">Products</a>
+      <a href="/cart.php">Cart</a>
     </div>
     <div class="footer-col">
       <h4>Categories</h4>
-      <a href="/techshop/products.php?category=1">Laptops</a>
-      <a href="/techshop/products.php?category=2">Phones</a>
-      <a href="/techshop/products.php?category=3">Accessories</a>
-      <a href="/techshop/products.php?category=4">TVs</a>
+      <a href="/products.php?category=1">Laptops</a>
+      <a href="/products.php?category=2">Phones</a>
+      <a href="/products.php?category=3">Accessories</a>
+      <a href="/products.php?category=4">TVs</a>
     </div>
     <div class="footer-col">
       <h4>Contact</h4>

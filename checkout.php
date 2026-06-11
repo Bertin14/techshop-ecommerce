@@ -4,7 +4,7 @@ require 'includes/header.php';
 
 // Redirect if cart is empty
 if (empty($_SESSION['cart'])) {
-    header('Location: /techshop/cart.php');
+    header('Location: /cart.php');
     exit;
 }
 
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['cart'] = [];
 
     // Redirect to confirmation
-    header("Location: /techshop/order-confirmation.php?order_id=$order_id");
+    header("Location: /order-confirmation.php?order_id=$order_id");
     exit;
 }
 ?>
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <span style="color:#e94560;">RWF <?= number_format($total) ?></span>
                 </div>
             </div>
-            <a href="/techshop/cart.php" style="display:block; text-align:center; margin-top:15px; color:#888;">
+            <a href="/cart.php" style="display:block; text-align:center; margin-top:15px; color:#888;">
                 ← Back to Cart
             </a>
         </div>

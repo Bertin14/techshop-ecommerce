@@ -3,7 +3,7 @@ require 'includes/db.php';
 require 'includes/header.php';
 
 if (!isset($_GET['order_id'])) {
-    header('Location: /techshop/index.php');
+    header('Location: /index.php');
     exit;
 }
 
@@ -65,7 +65,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php foreach ($items as $item): ?>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
                 <div style="display:flex; align-items:center; gap:12px;">
-                    <img src="/techshop/assets/images/<?= htmlspecialchars($item['image']) ?>"
+                    <img src="/assets/images/<?= htmlspecialchars($item['image']) ?>"
                         onerror="this.src='https://placehold.co/50x50?text=?'"
                         style="width:50px; height:50px; object-fit:cover; border-radius:6px;">
                     <span><?= htmlspecialchars($item['name']) ?> x<?= $item['quantity'] ?></span>
@@ -81,7 +81,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
-    <a href="/techshop/index.php" class="btn" style="margin-top:30px; font-size:16px;">
+    <a href="/index.php" class="btn" style="margin-top:30px; font-size:16px;">
         🏠 Back to Home
     </a>
 </div>
