@@ -19,6 +19,7 @@
         <a href="/index.php">⚡ TechShop</a>
       </div>
       <nav>
+        <a href="/admin/dashboard.php" style="color:#e94560;">📊 Admin</a>
         <a href="/index.php">Home</a>
         <a href="/products.php">Products</a>
         <a href="/cart.php">
