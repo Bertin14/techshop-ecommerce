@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!isset($_SESSION['admin_logged_in'])) {
+    header('Location: /admin/login.php');
+    exit;
+}
+?>
+<?php
 require '../includes/db.php';
 
 // Get stats
@@ -281,7 +288,11 @@ $ordersPerDay = $pdo->query("
 
         <div class="topbar">
             <h1 class="page-title">📊 Admin Dashboard</h1>
-            <a href="/index.php" class="back-btn">← Back to Store</a>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <span style="color:#aaa; font-size:14px;">👤 <?= htmlspecialchars($_SESSION['admin_username']) ?></span>
+                <a href="/admin/logout.php" style="background:#333; color:#aaa; padding:8px 16px; border-radius:6px; text-decoration:none; font-size:14px;">🚪 Logout</a>
+                <a href="/index.php" class="back-btn">← Back to Store</a>
+            </div>
         </div>
 
         <!-- STAT CARDS -->
