@@ -6,12 +6,12 @@
     <h1>Welcome to ⚡ TechShop</h1>
     <p>Your #1 Electronics Store in Rwanda — Fast Delivery, Best Prices</p>
 
-    <form action="/products.php" method="GET" class="hero-search">
+    <form action="<?= BASE_URL ?>/products.php" method="GET" class="hero-search">
         <input type="text" name="search" placeholder="Search for laptops, phones, accessories...">
         <button type="submit">Search</button>
     </form>
 
-    <a href="/products.php" class="btn" style="margin-top:15px;">Browse All Products</a>
+    <a href="<?= BASE_URL ?>/products.php" class="btn" style="margin-top:15px;">Browse All Products</a>
 
     <!-- ANIMATED STATS -->
     <div class="hero-stats">
@@ -64,7 +64,7 @@
             $badgeClasses = ['badge-new', 'badge-hot', 'badge-sale', 'badge-new', 'badge-hot', 'badge-sale', 'badge-new', 'badge-hot'];
             $i = ($product['id'] - 1) % 8;
             $img = $product['image'];
-            $src = (strpos($img, 'http') === 0) ? $img : '/assets/images/' . htmlspecialchars($img);
+            $src = (strpos($img, 'http') === 0) ? $img : ASSETS_URL . '/images/' . htmlspecialchars($img);
         ?>
             <div class="product-card">
                 <span class="product-badge <?= $badgeClasses[$i] ?>"><?= $badges[$i] ?></span>
@@ -78,7 +78,7 @@
                         <?= htmlspecialchars(substr($product['description'], 0, 55)) ?>...
                     </p>
                     <p class="price">RWF <?= number_format($product['price']) ?></p>
-                    <a href="/product-detail.php?id=<?= $product['id'] ?>" class="btn">View Details</a>
+                    <a href="<?= BASE_URL ?>/product-detail.php?id=<?= $product['id'] ?>" class="btn">View Details</a>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -94,7 +94,7 @@
         $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($categories as $cat):
         ?>
-            <a href="/products.php?category=<?= $cat['id'] ?>" style="text-decoration:none;">
+            <a href="<?= BASE_URL ?>/products.php?category=<?= $cat['id'] ?>" style="text-decoration:none;">
                 <div class="product-card" style="text-align:center; padding:30px;">
                     <div class="card-body">
                         <h3 style="font-size:20px;">
