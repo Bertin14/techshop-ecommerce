@@ -84,7 +84,7 @@ if ($search !== '') {
                         <p style="font-size:13px; color: <?= $product['stock'] > 0 ? 'green' : 'red' ?>;">
                             <?= $product['stock'] > 0 ? '✅ In Stock' : '❌ Out of Stock' ?>
                         </p>
-                        <a href="/product-detail.php?id=<?= $product['id'] ?>" class="btn" style="margin-top:10px;">View Details</a>
+                        <a href="<?= BASE_URL ?>/product-detail.php?id=<?= $product['id'] ?>" class="btn" style="margin-top:10px;">View Details</a>
                     </div>
                 </div>
             <?php endforeach; ?>
