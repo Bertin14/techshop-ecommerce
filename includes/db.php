@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/config.php';
 $host     = getenv('DB_HOST') ?: 'localhost';
 $dbname   = getenv('DB_NAME') ?: 'techshop';
 $username = getenv('DB_USER') ?: 'root';

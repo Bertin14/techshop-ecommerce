@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TechShop Rwanda</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -19,10 +19,10 @@
         <a href="/index.php">⚡ TechShop</a>
       </div>
       <nav>
-        <a href="/admin/login.php" style="color:#e94560;">📊 Admin</a>
-        <a href="/index.php">Home</a>
-        <a href="/products.php">Products</a>
-        <a href="/cart.php">
+        <a href="<?= BASE_URL ?>/admin/login.php" style="color:#e94560;">📊 Admin</a>
+        <a href="<?= BASE_URL ?>/index.php">Home</a>
+        <a href="<?= BASE_URL ?>/products.php">Products</a>
+        <a href="<?= BASE_URL ?>/cart.php">
           🛒 Cart
           <?php
           $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
