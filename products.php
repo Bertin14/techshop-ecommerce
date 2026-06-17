@@ -32,13 +32,13 @@ if ($search !== '') {
 
     <!-- FILTER BAR -->
     <div style="margin-bottom:25px; display:flex; gap:10px; flex-wrap:wrap;">
-        <a href="/products.php" class="btn" style="background:#1a1a2e;">All</a>
+        <a href="<?= BASE_URL ?>/products.php" class="btn" style="background:#1a1a2e;">All</a>
         <?php
         $stmt = $pdo->query("SELECT * FROM categories");
         $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($categories as $cat):
         ?>
-            <a href="/products.php?category=<?= $cat['id'] ?>"
+            <a href="<?= BASE_URL ?>/products.php?category=<?= $cat['id'] ?>"
                 class="btn"
                 style="background: <?= (isset($_GET['category']) && $_GET['category'] == $cat['id']) ? '#e94560' : '#555' ?>;">
                 <?= htmlspecialchars($cat['name']) ?>
