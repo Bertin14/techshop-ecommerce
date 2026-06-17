@@ -67,7 +67,7 @@ if ($search !== '') {
                 $badgeClasses = ['badge-new', 'badge-hot', 'badge-sale', 'badge-new', 'badge-hot', 'badge-sale', 'badge-new', 'badge-hot'];
                 $i = ($product['id'] - 1) % 8;
                 $img = $product['image'];
-                $src = (strpos($img, 'http') === 0) ? $img : '/assets/images/' . htmlspecialchars($img);
+                $src = (strpos($img, 'http') === 0) ? $img : ASSETS_URL . '/images/' . htmlspecialchars($img);
             ?>
                 <div class="product-card">
                     <span class="product-badge <?= $badgeClasses[$i] ?>"><?= $badges[$i] ?></span>

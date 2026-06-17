@@ -3,7 +3,7 @@ require 'includes/db.php';
 require 'includes/header.php';
 
 if (!isset($_GET['id'])) {
-    header('Location: /products.php');
+    header('Location: ' . BASE_URL . '/products.php');
     exit;
 }
 
@@ -19,12 +19,15 @@ if (!$product) {
     require 'includes/footer.php';
     exit;
 }
+
+$img = $product['image'];
+$src = (strpos($img, 'http') === 0) ? $img : ASSETS_URL . '/images/' . htmlspecialchars($img);
 ?>
 
 <div class="container" style="display:flex; gap:40px; flex-wrap:wrap; margin-top:50px;">
     <!-- PRODUCT IMAGE -->
     <div style="flex:1; min-width:280px;">
-        <img src="/assets/images/<?= htmlspecialchars($product['image']) ?>"
+        <img src="<?= $src ?>"
             alt="<?= htmlspecialchars($product['name']) ?>"
             onerror="this.src='https://placehold.co/400x300?text=No+Image'"
             style="width:100%; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
@@ -45,7 +48,7 @@ if (!$product) {
         </p>
 
         <?php if ($product['stock'] > 0): ?>
-            <form action="/cart.php" method="POST" style="display:flex; gap:15px; align-items:center; flex-wrap:wrap;">
+            <form action="<?= BASE_URL ?>/cart.php" method="POST" style="display:flex; gap:15px; align-items:center; flex-wrap:wrap;">
                 <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                 <input type="hidden" name="action" value="add">
                 <div style="display:flex; align-items:center; gap:10px;">
@@ -59,7 +62,7 @@ if (!$product) {
             </form>
         <?php endif; ?>
 
-        <a href="/products.php" style="display:inline-block; margin-top:20px; color:#888;">
+        <a href="<?= BASE_URL ?>/products.php" style="display:inline-block; margin-top:20px; color:#888;">
             ← Back to Products
         </a>
     </div>
