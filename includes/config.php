@@ -1,5 +1,9 @@
 <?php
-if (strpos($_SERVER['REQUEST_URI'], '/techshop') !== false) {
+$requestUri = $_SERVER['REQUEST_URI'];
+$scriptName = $_SERVER['SCRIPT_NAME'];
+
+// Detect if running under /techshop/ subfolder
+if (strpos($scriptName, '/techshop/') !== false) {
     define('BASE_URL', '/techshop');
     define('ASSETS_URL', '/techshop/assets');
 } else {
